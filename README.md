@@ -2,7 +2,7 @@
 
 **stack**
 
-> react js e node js
+> react js, node js, supabase, aws e vercel
 > 
 - Identificação do problema que será abordado
 
