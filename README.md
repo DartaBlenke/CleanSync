@@ -1,6 +1,6 @@
 # CleanSync
 
-**stack**
+## Stack
 
 > react js, node js, supabase, aws e vercel
 > 
@@ -18,7 +18,7 @@
 >
 > 
 >
- **caso de uso**
+ ## Caso de uso
     
   **Nome do Caso de Uso:** Agendar Lavagem de Carro
   
@@ -61,7 +61,7 @@
   12. sistema atualiza e retira agendamento do cliente
   13. sistema atualiza para a lavação o cancelamento
 
-**Requisitos Funcionais:**
+## Requisitos Funcionais:
 
 1. **Identificação do Clientes:**
     - Os clientes devem se identificar com a placa do seu carro.
@@ -79,7 +79,7 @@
 7. **Administração de Serviços:**
     - Os administradores devem ser capazes de adicionar, editar ou remover os serviços e seus preços e tempo de duração.
 
-**Requisitos Não Funcionais:**
+## Requisitos Não Funcionais:
 
 1. **Desempenho:**
     - O sistema deve ser responsivo e capaz de lidar com um número significativo de agendamentos sem degradação do desempenho.
@@ -98,17 +98,17 @@
 8. **Testes e Qualidade:**
     - O sistema deve passar por testes rigorosos de qualidade, incluindo testes unitários e testes e2e, entre outros.
   
-**Histórias de Usuário**
+## Histórias de Usuário
 - Como cliente, desejo poder agendar uma lavagem de carro conveniente para manter meu veículo limpo e em boas condições. Isso me permite economizar tempo e garantir que meu carro esteja sempre com uma aparência agradável.
 - Como um cliente, desejo ter a liberdade de escolher entre diferentes serviços de lavagem, oferecidos de forma individual ou combinada, para atender às minhas preferências e necessidades específicas de limpeza do veículo.
 
-**FDD**
+## FDD
 - A separação dos pacotes foi pensada de acordo com o fluxo de desenvolvimento, dando início no planejamento e refinamento da ideia e dando sequência a criação dos fluxos e identificando as necessidades e desenvolviemnto do protótipo antes de codificar efetivamente, a separação foi feita em 3 pacotes entregáveis.
 
-**Board**
-- https://trello.com/b/0RZClooI/portf%C3%B3lio
+## Board
+- https://trello.com/invite/b/0RZClooI/ATTIe97229bece5311f1b012689e487bbd0f353BB3E1/portfolio
 
-**Diagramas**
+## Diagramas
 <img width="5639" alt="diagramas portfólio" src="https://github.com/DartaBlenke/CleanSync/assets/69226024/c19fad2e-bc76-4f05-8b71-bf8b1ecce4d3">
 <img width="1168" alt="classe" src="https://github.com/DartaBlenke/CleanSync/assets/69226024/6fe2c299-0502-4a93-a79a-e470a2fbead6">
 <img width="3586" alt="diagramas2" src="https://github.com/DartaBlenke/CleanSync/assets/69226024/59578662-5e76-4eb7-930e-e5d83bc08cad">
