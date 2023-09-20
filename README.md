@@ -1,34 +1,31 @@
 # CleanSync
 
+## Objetivo
+> Trazer um sistema de gestão de lavação que seja intuitivo e de fácil utilização, que traga praticidade para as lavações e para seus clientes que estarão realizando os agendamentos
+
 ## Stack
-
 > react js, node js, supabase, aws e vercel
-> 
+
 ## Identificação do problema que será abordado
-
 > inexistência ou baixa qualidade nos softwares de agendamento de lavação de carros
-> 
+
 ## Relevância e importância do problema
-
 > gerenciamento e controle dos clientes, trazendo praticidade para a lavação e facilidade aos clientes que desejam agendar os serviços e consultar os valores dos mesmos
-> 
-## Proposta de solução para o problema identificado
 
+## Proposta de solução para o problema identificado
 > sistema de agendamento, onde o cliente seleciona o tipo de automóvel, o que ja altera os valores de base dos serviços, informa o modelo e placa, seleciona os serviços seleciona a data desejada e hora, forma de pagamento, e após revisar os mesmos, confirma o agendamento
->
-> 
->
- ## Caso de uso
+
+## Caso de uso
     
-  **Nome do Caso de Uso:** Agendar Lavagem de Carro
+**Nome do Caso de Uso:** Agendar Lavagem de Carro
   
-  **Ator Principal:** Cliente
+**Ator Principal:** Cliente
   
-  **Objetivo:** Permitir que os clientes agendem o serviço da lavação de carro de acordo com suas preferências e necessidades.
+**Objetivo:** Permitir que os clientes agendem o serviço da lavação de carro de acordo com suas preferências e necessidades.
   
-  **Pré-condições:** O sistema está online.
-  
-  **Fluxo Principal:**
+**Pré-condições:** O sistema está online.
+
+**Fluxo Principal:**
   
   1. cliente acessa a página da lavação.
   2. sistema solicita placa do veículo.
@@ -45,7 +42,7 @@
   13. sistema exibe resumo.
   14. cliente confirma dados e agendamento.
   
-  **Fluxo Alternativo (Cliente Cancela):**
+**Fluxo Alternativo (Cliente Cancela):**
   
   1. cliente acessa a página da lavação
   2. sistema solicita placa do veículo
@@ -101,6 +98,23 @@
 ## Histórias de Usuário
 - Como cliente, desejo poder agendar uma lavagem de carro conveniente para manter meu veículo limpo e em boas condições. Isso me permite economizar tempo e garantir que meu carro esteja sempre com uma aparência agradável.
 - Como um cliente, desejo ter a liberdade de escolher entre diferentes serviços de lavagem, oferecidos de forma individual ou combinada, para atender às minhas preferências e necessidades específicas de limpeza do veículo.
+
+## Trade-offs
+
+### Usabilidade
+- Sistema de fácil utilização, interface simples, bonita e intuitiva, trazendo toda a experiência necessária para o agendamento do serviço.
+
+### Manutenção
+- Fácil manutenabiliddade, por não tratar de muitas informações e não utilizar dados sensíveis, o que pode demandar mais dificuldade e tempo será no momento em que o sistema escalar
+e comece a ter mais clientes, exigindo mais personalizações e mais atenção a cada cliente.
+
+### Funcionalidade
+- Traz as funcionalidades necessárias para que o sistema seja capaz de realizar o agendamento, e para a lavação que ela possa definir os seus serviços, valores e horário de funcionamento
+para disponibilizar apenas os agendamentos e serviços disponibilizados.
+
+### Tempo de Resposta
+- Resposta de confirmação do agendamento praticamente instantânea, após completar o processo, para a lavação atualização de serviços, valores e horários assim que finalizar a edição dos
+mesmos, os agendamentos a seguir utilizarão dos novos padrões.
 
 ## FDD
 - A separação dos pacotes foi pensada de acordo com o fluxo de desenvolvimento, dando início no planejamento e refinamento da ideia e dando sequência a criação dos fluxos e identificando as necessidades e desenvolviemnto do protótipo antes de codificar efetivamente, a separação foi feita em 3 pacotes entregáveis.
