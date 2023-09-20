@@ -132,5 +132,5 @@ mesmos, os agendamentos a seguir utilizarão dos novos padrões.
 ### Diagrama de Classe
 <img width="1168" alt="classe" src="https://github.com/DartaBlenke/CleanSync/assets/69226024/6fe2c299-0502-4a93-a79a-e470a2fbead6">
 
-### Diagrama de Contexto | Digrama de Contâiner
+### Diagrama de Contexto | Digrama de Contêiner
 <img width="3586" alt="diagramas2" src="https://github.com/DartaBlenke/CleanSync/assets/69226024/59578662-5e76-4eb7-930e-e5d83bc08cad">
