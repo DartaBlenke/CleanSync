@@ -4,15 +4,15 @@
 
 > react js, node js, supabase, aws e vercel
 > 
-- Identificação do problema que será abordado
+## Identificação do problema que será abordado
 
 > inexistência ou baixa qualidade nos softwares de agendamento de lavação de carros
 > 
-- Relevância e importância do problema
+## Relevância e importância do problema
 
 > gerenciamento e controle dos clientes, trazendo praticidade para a lavação e facilidade aos clientes que desejam agendar os serviços e consultar os valores dos mesmos
 > 
-- Proposta de solução para o problema identificado
+## Proposta de solução para o problema identificado
 
 > sistema de agendamento, onde o cliente seleciona o tipo de automóvel, o que ja altera os valores de base dos serviços, informa o modelo e placa, seleciona os serviços seleciona a data desejada e hora, forma de pagamento, e após revisar os mesmos, confirma o agendamento
 >
