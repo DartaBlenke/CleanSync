@@ -108,6 +108,9 @@
 ## Board
 - https://trello.com/invite/b/0RZClooI/ATTIe97229bece5311f1b012689e487bbd0f353BB3E1/portfolio
 
+## Figma
+- https://www.figma.com/file/AB3SbAwt4bACvjHiEkXGuG/CleanSync?type=design&mode=design&t=tSjx7uEd9h7JdwGt-1
+
 ## Diagramas
 <img width="5639" alt="diagramas portfólio" src="https://github.com/DartaBlenke/CleanSync/assets/69226024/c19fad2e-bc76-4f05-8b71-bf8b1ecce4d3">
 <img width="1168" alt="classe" src="https://github.com/DartaBlenke/CleanSync/assets/69226024/6fe2c299-0502-4a93-a79a-e470a2fbead6">
