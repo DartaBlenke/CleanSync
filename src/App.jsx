@@ -1,19 +1,27 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
+import supabase from './config/supabase'
 import './App.css'
+import { Outlet } from 'react-router-dom'
+import Navbar from './components/Navbar'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  async function fetchData() {
+    let { data: client } = await supabase.from('client').select('*')
+    console.log(client)
+  }
+  
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
-    <>
+    <div>
+      <Navbar />
       <h1>Clean Sync</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-
-    </>
+      <Outlet />
+      <p>footer</p>
+    </div>
   )
 }
 
