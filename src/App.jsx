@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import supabase from './config/supabase'
-import './App.css'
 import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar'
+
 
 function App() {
 
@@ -17,9 +17,12 @@ function App() {
 
   return (
     <div>
-      <Navbar />
-      <h1>Clean Sync</h1>
-      <Outlet />
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <Outlet />
+      </div>
       <p>footer</p>
     </div>
   )
