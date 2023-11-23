@@ -10,13 +10,13 @@ const Flow = () => {
       <p className='sm:text-3xl text-xl mt-10'>Selecione o fluxo desejado</p>
       <div className='grid grid-cols-5'>
         <div className='col-start-2 mt-10'>
-          <Link to="/loginClient">
-              <Button>Cliente</Button>
+          <Link to="/Wash">
+              <Button>Lavação</Button>
           </Link>
         </div>
         <div className='col-start-4 mt-10'>
-          <Link to="/loginWash">
-              <Button>Lavação</Button>
+          <Link to="/Client">
+              <Button>Cliente</Button>
           </Link>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import ReactDOM from 'react-dom/client'
 import './styles/index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -9,6 +9,9 @@ import Error from './routes/Error'
 import Flow from './routes/Flow'
 import LoginWash from './routes/LoginWash'
 import LoginClient from './routes/LoginClient'
+import Client from './routes/Client'
+import Wash from './routes/Wash'
+import ClientFlow from './routes/ClientFlow'
 
 const router = createBrowserRouter([
   {
@@ -35,14 +38,24 @@ const router = createBrowserRouter([
       {
         path: "/loginClient",
         element: <LoginClient />
-      }
+      },
+      {
+        path: "/Wash",
+        element: <Wash />
+      },
+      {
+        path: "/Client",
+        element: <Client />
+      },
+      {
+        path: "/ClientFlow/:item",
+        element: <ClientFlow />
+      },
     ]
   },
 
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
 )
