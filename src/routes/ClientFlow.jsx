@@ -41,8 +41,10 @@ const ClientFlow = () => {
         </div>
         <div>
           <FlowTitle>Selecione os serviços desejados.</FlowTitle>
-          <div className='grid grid-rows-3 gap-10 pt-[15%]'>
+          <div className='grid grid-rows-4 gap-10 pt-[15%]'>
             <CheckboxInput label="Lavação" value={10} onChange={handleCheckboxChange} />
+            <CheckboxInput label="Cera" value={10} onChange={handleCheckboxChange} />
+            <CheckboxInput label="Polimento" value={10} onChange={handleCheckboxChange} />
           </div>
         </div>
         <div>
@@ -60,13 +62,22 @@ const ClientFlow = () => {
             <Input>Pix</Input>
           </div>
         </div>
+        <div>
+          <FlowTitle>Informações finais.</FlowTitle>
+          <div className='grid grid-rows-4 gap-10 pt-[15%]'>
+            <Input>carro</Input>
+            <Input>serviço</Input>
+            <Input>data</Input>
+            <Input>pagamento</Input>
+          </div>
+        </div>
       </div>
       <div className='grid grid-cols-2 w-full h-[10%] mb-[25%] mt-[25%]'>
         <div className='text-center'>
-        <button className='bg-gray-400/80 text-black py-2 px-6 rounded hover:bg-gray-700 hover:text-white duration-300'>Anterior</button>
+        <button className='bg-gray-400/80 text-black py-2 px-6 rounded hover:bg-gray-700 hover:text-white duration-300 w-30'>Anterior</button>
         </div>
         <div className='text-center'>
-        <button className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300'>Próximo</button>
+        <button className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-30'>Confirmar</button>
         </div>
       </div>
     </div>
