@@ -20,10 +20,10 @@ const Navbar = () => {
   </>
   return (
     <nav>
-      <div className='h-10vh flex justify-between z-50 text-black lg:py-5 px-20 py-10 flex-1'>
+      <div className='flex px-10 md:px-20 py-[13%] lg:py-8 md:py-8'>
         <div className='flex items-center flex-1'>
           <Car color='#0c126f'/>
-          <span className='text-3x1 text-blue-950 font-bold flex justify-between px-4'>CleanSync</span>
+          <span className='text-3x1 text-blue-950 font-bold px-4'>CleanSync</span>
         </div>
         <div className='hidden md:flex lg: flex-1 items center justify-center font-normal'>
           <div className='flex-10'>
