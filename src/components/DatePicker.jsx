@@ -3,7 +3,7 @@ import 'react-datetime-picker/dist/DateTimePicker.css'
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import DateTimePicker from 'react-datetime-picker'
-import '../styles/DateTimePicker.css'
+import '../styles/datetimepicker.css'
 
 export const Datepicker = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
