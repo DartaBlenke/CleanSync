@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const Flow = () => {
   
   return (
-    <div className='max-w-[800px] mt-[170px] h-auto mx-auto text-center flex flex-col items-center'>
+    <div className='max-w-[800px] mt-[100px] md:mt-[170px] h-auto mx-auto text-center flex flex-col items-center'>
       <h1 className='md:text-6xl sm:text-5xl text-4xl font-bold text-blue-900 md:py-6'>Bem vindo aos serviços CleanSync</h1>
       <p className='sm:text-3xl text-xl mt-10'>Selecione o fluxo desejado</p>
       <div className='grid grid-cols-2 w-full h-[10%] mb-[25%] mt-[25%]'>
