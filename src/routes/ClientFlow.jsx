@@ -65,7 +65,6 @@ const ClientFlow = () => {
           <FlowTitle>Selecione a data e hora do serviço.</FlowTitle>
           <div className='flex flex-col gap-10 pt-[15%] pb-[15%]'>
             <Datepicker />
-            <Input>Hora</Input>
           </div>
         </div>
         <div>
