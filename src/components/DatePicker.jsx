@@ -10,7 +10,7 @@ export const Datepicker = () => {
 
   return (
     <label className='relative cursor-pointer'>
-      <DateTimePicker locale='pt-BR' disableClock={true} disableCalendar={true} minDate={new Date()} value={selectedDate} onChange={setSelectedDate} className='h-20 w-full px-10 sm:px-20 text-xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 placeholder-opacity-0 transition duration-200'/>
+      <DateTimePicker locale='pt-BR' disableClock={true} disableCalendar={true} minDate={new Date()} minutePlaceholder={"00"} hourPlaceholder={"00"} dayPlaceholder={"00"} yearPlaceholder={"00"} monthPlaceholder={"00"} value={selectedDate} onChange={setSelectedDate} className='h-20 w-full px-10 sm:px-20 text-xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 placeholder-opacity-0 transition duration-200'/>
     </label>
   )
 }
