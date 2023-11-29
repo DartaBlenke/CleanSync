@@ -1,5 +1,5 @@
 import { Button } from '../components/Button'
-import { Input } from '../components/Input'
+import { Input }  from '../components/Input'
 import { ArrowBigLeftDash } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
