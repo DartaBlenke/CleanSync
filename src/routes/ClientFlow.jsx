@@ -159,7 +159,7 @@ const ClientFlow = () => {
             </label>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Telefone</span>
-              <input type="number" onChange={handleChangePhone} value={phone} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
+              <input type="number" onChange={handleChangePhone} value={phone} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' maxLength={11} />
             </label>
           </div>
         </div>
@@ -172,7 +172,7 @@ const ClientFlow = () => {
             </label>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Placa</span>
-              <input type="text" onChange={handleChangePlate} value={plate} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
+              <input type="text" onChange={handleChangePlate} value={plate} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200 text-transform: uppercase'  maxLength={7} />
             </label>
           </div>
         </div>
