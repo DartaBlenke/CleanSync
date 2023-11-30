@@ -140,7 +140,7 @@ const ClientFlow = () => {
   ]
   
   return (
-    <form>
+    <form className='h-auto'>
     <div className='max-w-[800px] mt-[30px] w-full h-auto mx-auto flex flex-col items-center md:mt-[170px]'>
       <h1 className='text-xl md:text-3xl sm:text-2xl px-6'>Bem vindo ao nosso serviço de agendamento!!</h1>
       <div className='w-[80%]'>
