@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { FlowTitle } from '../components/FlowTitle'
-import { CheckboxInput } from '../components/CheckboxInput'
 import { useState } from 'react'
 import { Datepicker } from '../components/DatePicker'
+import { HourSelect } from '../components/HourSelect'
 import PayCard from '../components/PayCard'
 import Pix from '../assets/img/pix.svg'
 import Cash from '../assets/img/cash.svg'
@@ -10,6 +10,7 @@ import Card from '../assets/img/card.svg'
 import Phone from '../assets/img/phone.svg'
 import User from '../assets/img/user.svg'
 import Service from '../assets/img/service.svg'
+import Wallet from '../assets/img/wallet.svg'
 import Date from '../assets/img/calendar.svg'
 import { ReviewCard } from '../components/ReviewCard'
 import '../styles/disableStyles.css'
@@ -23,23 +24,103 @@ const ClientFlow = () => {
   const { item } = useParams()
 
   const vehicleFlow = vehicles[item]
-  console.log(vehicleFlow)
 
-  const [totalValue, setTotalValue] = useState(0)
-
-  const handleCheckboxChange = (value) => {
-    setTotalValue(totalValue + value);
-  }
-
-  function selectPayment (item) {
-    console.log(item.id)
-  }
+  const washPrice = vehicleFlow.prices[0]
+  const waxPrice = vehicleFlow.prices[1]
+  const polishPrice = vehicleFlow.prices[2]
 
   const payments = [
-    { id: 0, text: "Crédito", imgSrc: Card },
+    { id: 0, text: "Cartão", imgSrc: Card },
     { id: 1, text: "Pix", imgSrc: Pix },
     { id: 2, text: "Dinheiro", imgSrc: Cash}
   ]
+  
+  const [selectedPayment, setSelectedPayment] = useState(null)
+  const [paymentLabel, setPaymentLabel] = useState('')
+  const selectPayment = (paymentId) => {
+    let label = ''
+    setSelectedPayment(paymentId)
+    if(paymentId === 0) {
+      label = 'Cartão'
+    } else if (paymentId === 1) {
+      label = 'Pix'
+    } else {
+      label = 'Dinheiro'
+    }
+    setPaymentLabel(label)
+  }
+
+  const [name, setName] = useState('')
+  const handleChangeName = (event) => {
+    const newValueName = event.target.value
+    setName(newValueName)
+  }
+
+  const [phone, setPhone] = useState('')
+  const handleChangePhone = (event) => {
+    const newValuePhone = event.target.value
+    setPhone(newValuePhone)
+  }
+
+  const [model, setModel] = useState('')
+  const handleChangeModel = (event) => {
+    const newValueModel = event.target.value
+    setModel(newValueModel)
+  }
+
+  const [plate, setPlate] = useState('')
+  const handleChangePlate = (event) => {
+    const newValuePlate = event.target.value
+    setPlate(newValuePlate)
+  }
+
+  const [checkBoxWash, setCheckBoxWash] = useState(false)
+  const handleCheckboxWash = (event) => {
+    const newValue = event.target.checked
+    setCheckBoxWash(newValue)
+    checkBoxReview(1)
+  }
+
+  const [checkBoxWax, setCheckBoxWax] = useState(false)
+  const handleCheckboxWax = (event) => {
+    const newValue = event.target.checked
+    setCheckBoxWax(newValue)
+    checkBoxReview(2)
+  }
+
+  const [checkBoxPolish, setCheckBoxPolish] = useState(false)
+  const handleCheckboxPolish = (event) => {
+    const newValue = event.target.checked
+    setCheckBoxPolish(newValue)
+    checkBoxReview(3)
+  }
+
+  const [labelReview, setLabelReview] = useState('')
+  const checkBoxReview = (serviceSelected) => {
+    let label = ''
+    if (serviceSelected == 1) {
+      label = 'Lavação'
+    } else if (serviceSelected == 2) {
+      label = 'Cera'
+    } else if (serviceSelected == 3) {
+      label = 'Polimento'
+    } else {
+      label = ''
+    }
+    setLabelReview(label)
+  }
+
+  const [selectedDate, setSelectedDate] = useState(null)
+  const selectNewDate = (newDate) => {
+    console.log('Nova data recebida na tela pai:', newDate)
+    setSelectedDate(newDate)
+  }
+
+  const [selectedHour, setSelectedHour] = useState(8)
+  const getSelectedHour = (newHour) => {
+    console.log('Nova hora selecionada na tela pai:', newHour)
+    setSelectedHour(newHour)
+  }
 
   // const onSubmit = (e) => {
   //   e.preventDefault()
@@ -49,37 +130,13 @@ const ClientFlow = () => {
   //   console.log(data)
   // }
 
-  const [nome, setNome] = useState('')
-  const handleChangeNome = (event) => {
-    const novoValorNome = event.target.value
-    setNome(novoValorNome);
-  }
-
-  const [telefone, setTelefone] = useState('')
-  const handleChangeTelefone = (event) => {
-    const novoValorTelefone = event.target.value
-    setTelefone(novoValorTelefone);
-  }
-
-  const [modelo, setModelo] = useState('')
-  const handleChangeModelo = (event) => {
-    const novoValorModelo = event.target.value
-    setModelo(novoValorModelo);
-  }
-
-  const [placa, setPlaca] = useState('')
-  const handleChangePlaca = (event) => {
-    const novoValorPlaca = event.target.value
-    setPlaca(novoValorPlaca);
-  }
-
   const reviews = [
-    { id: 0, text: `${nome}`, imgSrc: User },
-    { id: 1, text: `${telefone}`, imgSrc: Phone },
-    { id: 2, text: `${modelo} - ${placa}`, imgSrc: vehicleFlow.imgSrc },
-    { id: 3, text: "Lavação", imgSrc: Service },
-    { id: 4, text: "12/12/2023 - 14:00", imgSrc: Date},
-    { id: 5, text: "Cartão", imgSrc: Card}
+    { id: 0, text: `${name}`, imgSrc: User },
+    { id: 1, text: `${phone}`, imgSrc: Phone },
+    { id: 2, text: `${model} - ${plate}`, imgSrc: vehicleFlow.imgSrc },
+    { id: 3, text: `${labelReview}`, imgSrc: Service },
+    { id: 4, text: `${selectedDate} - ${selectedHour}`, imgSrc: Date},
+    { id: 5, text: `${paymentLabel}`, imgSrc: Wallet}
   ]
   
   return (
@@ -92,11 +149,11 @@ const ClientFlow = () => {
           <div className='flex flex-col gap-10 py-[15%]'>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Nome</span>
-              <input type="text" onChange={handleChangeNome} value={nome} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
+              <input type="text" onChange={handleChangeName} value={name} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
             </label>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Telefone</span>
-              <input type="number" onChange={handleChangeTelefone} value={telefone} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
+              <input type="number" onChange={handleChangePhone} value={phone} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
             </label>
           </div>
         </div>
@@ -105,26 +162,42 @@ const ClientFlow = () => {
           <div className='flex flex-col gap-10 py-[15%]'>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Modelo</span>
-              <input type="text" onChange={handleChangeModelo} value={modelo} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
+              <input type="text" onChange={handleChangeModel} value={model} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
             </label>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Placa</span>
-              <input type="text" onChange={handleChangePlaca} value={placa} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
+              <input type="text" onChange={handleChangePlate} value={plate} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
             </label>
           </div>
         </div>
         <div>
           <FlowTitle>Selecione os serviços desejados.</FlowTitle>
           <div className='flex flex-col gap-10 py-[15%]'>
-            <CheckboxInput label="Lavação" value={10} onChange={handleCheckboxChange} />
-            <CheckboxInput label="Cera" value={10} onChange={handleCheckboxChange} />
-            <CheckboxInput label="Polimento" value={10} onChange={handleCheckboxChange} />
+            <label className="text-2xl text-[#9db8fb] w-full cursor-pointer">
+              <div className="flex items-center border border-[#9db8fb] rounded h-20 ">
+                <input type="checkbox" checked={checkBoxWash} onChange={handleCheckboxWash} className="w-5 h-5 mx-6 accent-green-600 border-green-600 rounded cursor-pointer" />
+                Lavação - R${washPrice}
+              </div>
+            </label>
+            <label className="text-2xl text-[#9db8fb] w-full cursor-pointer">
+              <div className="flex items-center border border-[#9db8fb] rounded h-20 ">
+                <input type="checkbox" checked={checkBoxWax} onChange={handleCheckboxWax} className="w-5 h-5 mx-6 accent-green-600 border-green-600 rounded cursor-pointer" />
+                Cera - R${waxPrice}
+              </div>
+            </label>
+            <label className="text-2xl text-[#9db8fb] w-full cursor-pointer">
+              <div className="flex items-center border border-[#9db8fb] rounded h-20 ">
+                <input type="checkbox" checked={checkBoxPolish} onChange={handleCheckboxPolish} className="w-5 h-5 mx-6 accent-green-600 border-green-600 rounded cursor-pointer" />
+                Polimento - R${polishPrice}
+              </div>
+            </label>
           </div>
         </div>
         <div>
           <FlowTitle>Selecione a data e hora do serviço.</FlowTitle>
           <div className='flex flex-col gap-10 py-[15%]'>
-            <Datepicker />
+            <Datepicker selectedDate={selectNewDate}/>
+            <HourSelect selectHour={getSelectedHour} />
           </div>
         </div>
         <div>
@@ -133,7 +206,7 @@ const ClientFlow = () => {
             {
               payments.map((payment, index) => (
                 <div key={index} className='flex justify-center'>
-                <PayCard item={payment} selectPayment={selectPayment} />
+                <PayCard item={payment} onClick={selectPayment} selected={selectedPayment === payment.id} setSelected={setSelectedPayment} />
                 </div>
               ))
             }
