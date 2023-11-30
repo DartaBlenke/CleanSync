@@ -225,9 +225,9 @@ const ClientFlow = () => {
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-1 w-full h-[10%] mb-[25%] mt-[10%]'>
+      <div className='grid grid-cols-1 w-full h-[100px] mb-[25%] mt-[10%]'>
         <div className='text-center'>
-        <button type='submit' className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-[80%] h-[140%]'>Agendar</button>
+        <button type='submit' className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-[80%] h-[70px]'>Agendar</button>
         </div>
       </div>
     </div>
