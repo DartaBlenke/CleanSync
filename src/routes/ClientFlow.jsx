@@ -112,14 +112,20 @@ const ClientFlow = () => {
 
   const [selectedDate, setSelectedDate] = useState(null)
   const selectNewDate = (newDate) => {
-    console.log('Nova data recebida na tela pai:', newDate)
-    setSelectedDate(newDate)
+    const day = newDate.getDate().toString().padStart(2, '0')
+    const month = (newDate.getMonth() + 1).toString().padStart(2, '0')
+    const year = newDate.getFullYear()
+
+    const formattedDate = `${day}/${month}/${year}`
+
+    console.log(formattedDate)
+    setSelectedDate(formattedDate)
   }
 
   const [selectedHour, setSelectedHour] = useState(8)
   const getSelectedHour = (newHour) => {
-    console.log('Nova hora selecionada na tela pai:', newHour)
     setSelectedHour(newHour)
+
   }
 
   // const onSubmit = (e) => {
@@ -135,7 +141,7 @@ const ClientFlow = () => {
     { id: 1, text: `${phone}`, imgSrc: Phone },
     { id: 2, text: `${model} - ${plate}`, imgSrc: vehicleFlow.imgSrc },
     { id: 3, text: `${labelReview}`, imgSrc: Service },
-    { id: 4, text: `${selectedDate} - ${selectedHour}`, imgSrc: Date},
+    { id: 4, text: `${selectedDate} - ${selectedHour}h`, imgSrc: Date},
     { id: 5, text: `${paymentLabel}`, imgSrc: Wallet}
   ]
   
