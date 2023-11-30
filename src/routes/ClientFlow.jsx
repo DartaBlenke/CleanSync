@@ -141,7 +141,7 @@ const ClientFlow = () => {
   
   return (
     <form className='h-auto'>
-    <div className='max-w-[800px] mt-[30px] w-full h-auto mx-auto flex flex-col items-center md:mt-[170px]'>
+    <div className='max-w-[800px] mt-[30px] w-full mx-auto flex flex-col items-center md:mt-[170px]'>
       <h1 className='text-xl md:text-3xl sm:text-2xl px-6'>Bem vindo ao nosso serviço de agendamento!!</h1>
       <div className='w-[80%]'>
         <div>
@@ -227,7 +227,7 @@ const ClientFlow = () => {
       </div>
       <div className='grid grid-cols-1 w-full h-[10%] mb-[25%] mt-[10%]'>
         <div className='text-center'>
-        <button type='submit' className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-[80%]'>Agendar</button>
+        <button type='submit' className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-[80%] h-[140%]'>Agendar</button>
         </div>
       </div>
     </div>
