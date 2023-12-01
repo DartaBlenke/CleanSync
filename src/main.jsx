@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import './styles/index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
-import Service from './routes/Service'
 import ErrorPage from './routes/Error'
 import Flow from './routes/Flow'
 import Client from './routes/Client'
@@ -19,10 +18,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Flow />
-      },
-      {
-        path: "/service",
-        element: <Service />
       },
       {
         path: "/Wash",
