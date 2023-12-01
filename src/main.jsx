@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import Home from './routes/Home'
 import Service from './routes/Service'
-import Error from './routes/Error'
+import ErrorPage from './routes/Error'
 import Flow from './routes/Flow'
 import LoginWash from './routes/LoginWash'
 import LoginClient from './routes/LoginClient'
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <Error />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

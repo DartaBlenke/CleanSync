@@ -1,11 +1,12 @@
 
-const Error = () => {
+const ErrorPage = () => {
   
   return (
-    <div>
-      <h1>Error 404!</h1>
+    <div className="text-center text-3xl mt-[20%]">
+      <h1 className="font-bold">Error 404!</h1>
+      <p>Página não encontrada</p>
     </div>
   )
 }
 
-export default Error
+export default ErrorPage
