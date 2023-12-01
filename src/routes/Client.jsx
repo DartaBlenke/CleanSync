@@ -2,7 +2,7 @@ import Card from '../components/Card'
 import { useNavigate } from 'react-router-dom'
 
 
-const Wash = () => {
+const Client = () => {
   const navigate = useNavigate()
 
   function selectVehicle (item) {
@@ -29,4 +29,4 @@ const Wash = () => {
   )
 }
 
-export default Wash
+export default Client

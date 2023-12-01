@@ -34,7 +34,7 @@ function createData(selectedDate, selectedHour, model, plate, labelService, name
   }
 }
 
-export default function Client() {
+export default function Wash() {
   const [fetchError, setFetchError] = useState(null)
   const [schedule, setSchedule] = useState(null)
 
