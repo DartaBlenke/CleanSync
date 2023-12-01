@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { FlowTitle } from '../components/FlowTitle'
 import { useState } from 'react'
 import { Datepicker } from '../components/DatePicker'
@@ -60,7 +60,7 @@ const ClientFlow = () => {
 
   const [phone, setPhone] = useState('')
   const handleChangePhone = (event) => {
-    const value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    const value = event.target.value.replace(/\D/g, '')
     if (value.length <= 11) {
       setPhone(value)
     }
@@ -140,9 +140,8 @@ const ClientFlow = () => {
     { id: 5, text: `${paymentLabel}`, imgSrc: Wallet}
   ]
 
-  const navigate = useNavigate()
-
   const [formError, setFormError] = useState(null)
+  const [agendamentoConfirmado, setAgendamentoConfirmado] = useState(false)
   
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -161,7 +160,9 @@ const ClientFlow = () => {
     }
     if (data) {
       setFormError(null)
-      navigate('/')
+    }
+    if (!formError) {
+      setAgendamentoConfirmado(true)
     }
   }
   
@@ -178,7 +179,7 @@ const ClientFlow = () => {
               <input type="text" onChange={handleChangeName} value={name} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
             </label>
             <label className='relative cursor-pointer' >
-              <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Telefone</span>
+              <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Telefone - Com ddd</span>
             <input type="number" maxLength={11} onChange={handleChangePhone} value={phone} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
             </label>
           </div>
@@ -254,6 +255,9 @@ const ClientFlow = () => {
       <div className='grid grid-cols-1 w-full h-[100px] mb-[25%] mt-[10%] gap-4'>
         <div className='text-center'>
           <p className='font-bold text-lg text-red-600'>{formError}</p>
+          {agendamentoConfirmado && (
+            <p className='font-bold text-green-600 text-lg mb-4'>Agendamento Confirmado</p>
+          )}
         </div>
         <div className='text-center'>
         <button type='submit' onClick={handleSubmit} className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-[80%] h-[70px]'>Agendar</button>
