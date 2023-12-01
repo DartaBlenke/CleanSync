@@ -1,25 +1,25 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import * as React from 'react'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TablePagination from '@mui/material/TablePagination'
+import TableRow from '@mui/material/TableRow'
 
 const columns = [
   { id: 'time', label: 'Horário', minWidth: 40 },
-  { id: 'car_model', label: 'Modelo', minWidth: 40 },
+  { id: 'model', label: 'Modelo', minWidth: 40 },
   { id: 'plate', label: 'Placa', minWidth: 40 },
   { id: 'service', label: 'Serviço', minWidth: 40 },
-  { id: 'client_name', label: 'Nome', minWidth: 40 },
+  { id: 'name', label: 'Nome', minWidth: 40 },
   { id: 'phone', label: 'Telefone', minWidth: 40 },
-  { id: 'payment_method', label: 'Pagamento', minWidth: 40 },
-];
+  { id: 'paymentLabel', label: 'Pagamento', minWidth: 40 },
+]
 
-function createData(time, car_model, plate, service, client_name, phone, payment_method) {
-  return { time, car_model, plate, service, client_name, phone, payment_method }
+function createData(time, model, plate, service, name, phone, paymentLabel) {
+  return { time, model, plate, service, name, phone, paymentLabel }
 }
 
 const rows = [
@@ -33,21 +33,20 @@ const rows = [
   createData('15:00', 'Lancer','BRA2E19', 'Lavação', 'Caio', '47 999999999', 'Pix'),
   createData('16:00', 'Lancer','BRA2E19', 'Lavação', 'Caio', '47 999999999', 'Pix'),
   createData('17:00', 'Lancer','BRA2E19', 'Lavação', 'Caio', '47 999999999', 'Pix'),
-  createData('18:00', 'Lancer','BRA2E19', 'Lavação', 'Caio', '47 999999999', 'Pix'),
-];
+]
 
 export default function Client() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   return (
     <div className='mt-[30px] w-full h-auto mx-auto flex flex-col items-center md:mt-[100px]'>
@@ -58,11 +57,7 @@ export default function Client() {
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
+                  <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }} >
                     {column.label}
                   </TableCell>
                 ))}
@@ -75,31 +70,21 @@ export default function Client() {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.time}>
                       {columns.map((column) => {
-                        const value = row[column.id];
+                        const value = row[column.id]
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
                           </TableCell>
-                        );
+                        )
                       })}
                     </TableRow>
-                  );
+                  )
                 })}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <TablePagination rowsPerPageOptions={[10, 25, 100]} component="div" count={rows.length} rowsPerPage={rowsPerPage} page={page} onPageChange={handleChangePage} onRowsPerPageChange={handleChangeRowsPerPage} />
       </Paper>
     </div>
-  );
+  )
 }

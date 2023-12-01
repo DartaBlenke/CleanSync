@@ -8,7 +8,7 @@ export const HourSelect = ({ selectHour }) => {
     setHour(newHour)
     selectHour(newHour)
   }
-  const horas = Array.from({ length: 11 }, (_, index) => index + 8)
+  const horas = Array.from({ length: 10 }, (_, index) => index + 8)
 
   return (
     <label className='relative cursor-pointer'>
