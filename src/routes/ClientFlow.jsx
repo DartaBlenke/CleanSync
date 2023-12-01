@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import { FlowTitle } from '../components/FlowTitle'
 import { useState } from 'react'
 import { Datepicker } from '../components/DatePicker'
 import { HourSelect } from '../components/HourSelect'
@@ -15,7 +14,7 @@ import Date from '../assets/img/calendar.svg'
 import { ReviewCard } from '../components/ReviewCard'
 import '../styles/disableStyles.css'
 import supabase from '../config/supabase'
-
+import React from 'react'
 
 
 const ClientFlow = () => {
@@ -25,7 +24,10 @@ const ClientFlow = () => {
 
   const { item } = useParams()
 
-  const vehicleFlow = vehicles[item]
+  let vehicleFlow = null;
+  if (vehicles && vehicles[item]) {
+    vehicleFlow = vehicles[item];
+  }
 
   const washPrice = vehicleFlow.prices[0]
   const waxPrice = vehicleFlow.prices[1]
@@ -172,7 +174,7 @@ const ClientFlow = () => {
       <h1 className='text-xl md:text-3xl sm:text-2xl px-6'>Bem vindo ao nosso serviço de agendamento!!</h1>
       <div className='w-[80%]'>
         <div>
-          <FlowTitle>Informe seus dados pessoais.</FlowTitle>
+          <p className='sm:text-3xl text-2xl md:text-4xl mt-10 font-bold text-blue-900 text-center px-10'>Informe seus dados pessoais.</p>
           <div className='flex flex-col gap-10 py-[15%]'>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Nome</span>
@@ -185,7 +187,7 @@ const ClientFlow = () => {
           </div>
         </div>
         <div>
-          <FlowTitle>Informe os dados do veículo.</FlowTitle>
+          <p className='sm:text-3xl text-2xl md:text-4xl mt-10 font-bold text-blue-900 text-center px-10'>Informe os dados do veículo.</p>
           <div className='flex flex-col gap-10 py-[15%]'>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Modelo</span>
@@ -198,7 +200,7 @@ const ClientFlow = () => {
           </div>
         </div>
         <div>
-          <FlowTitle>Selecione os serviços desejados.</FlowTitle>
+          <p className='sm:text-3xl text-2xl md:text-4xl mt-10 font-bold text-blue-900 text-center px-10'>Selecione os serviços desejados.</p>
           <div className='flex flex-col gap-10 py-[15%]'>
             <label className="text-2xl text-[#9db8fb] w-full cursor-pointer">
               <div className="flex items-center border border-[#9db8fb] rounded h-20 ">
@@ -221,14 +223,14 @@ const ClientFlow = () => {
           </div>
         </div>
         <div>
-          <FlowTitle>Selecione a data e hora do serviço.</FlowTitle>
+          <p className='sm:text-3xl text-2xl md:text-4xl mt-10 font-bold text-blue-900 text-center px-10'>Selecione a data e hora do serviço.</p>
           <div className='flex flex-col gap-10 py-[15%]'>
             <Datepicker selectedDate={selectNewDate}/>
             <HourSelect selectHour={getSelectedHour} />
           </div>
         </div>
         <div>
-          <FlowTitle>Selecione a forma de pagamento.</FlowTitle>
+          <p className='sm:text-3xl text-2xl md:text-4xl mt-10 font-bold text-blue-900 text-center px-10'>Selecione a forma de pagamento.</p>
           <div className='flex flex-col gap-10 py-[15%]'>
             {
               payments.map((payment, index) => (
@@ -240,7 +242,7 @@ const ClientFlow = () => {
           </div>
         </div>
         <div>
-          <FlowTitle>Informações finais.</FlowTitle>
+          <p className='sm:text-3xl text-2xl md:text-4xl mt-10 font-bold text-blue-900 text-center px-10'>Informações finais.</p>
           <div className='flex flex-col gap-10 py-[15%]'>
           {
               reviews.map((review, index) => (
