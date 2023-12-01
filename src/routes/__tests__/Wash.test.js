@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Wash from '../Wash';
+import Wash, { columns } from '../Wash';
 
 // Mock para o useNavigate
 jest.mock('react-router-dom', () => ({
@@ -25,6 +25,20 @@ describe('Wash', () => {
       </Router>
     );
     expect(screen.getByText('Visualize os agendamentos !!')).toBeInTheDocument();
+  });
+
+  test('renders the table', () => {
+    render(
+      <Router>
+        <Wash />
+      </Router>
+    );
+    const tableElement = screen.getByRole('table');
+    expect(tableElement).toBeInTheDocument();
+
+    columns.forEach((column) => {
+      expect(screen.getByText(column.label)).toBeInTheDocument();
+    });
   });
 
 });

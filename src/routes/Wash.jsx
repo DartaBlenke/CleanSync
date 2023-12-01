@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow'
 import supabase from '../config/supabase'
 import { useEffect, useState } from 'react'
 
-const columns = [
+export const columns = [
   { id: 'selectedDate', label: 'Data - mês/dia/ano', minWidth: 40 },
   { id: 'selectedHour', label: 'Horário', minWidth: 40 },
   { id: 'model', label: 'Modelo', minWidth: 40 },
