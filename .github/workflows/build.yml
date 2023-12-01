@@ -18,9 +18,13 @@ jobs:
           yarn install
           yarn add --dev jest
       - name: Test and coverage
-        run: yarn jest --coverage --passWithNoTests
+        run: yarn jest --coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.coverage.exclusions=/*.test.js,/__tests__/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
