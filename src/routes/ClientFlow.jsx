@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { FlowTitle } from '../components/FlowTitle'
 import { useState } from 'react'
 import { Datepicker } from '../components/DatePicker'
@@ -14,6 +14,8 @@ import Wallet from '../assets/img/wallet.svg'
 import Date from '../assets/img/calendar.svg'
 import { ReviewCard } from '../components/ReviewCard'
 import '../styles/disableStyles.css'
+import supabase from '../config/supabase'
+
 
 
 const ClientFlow = () => {
@@ -58,8 +60,10 @@ const ClientFlow = () => {
 
   const [phone, setPhone] = useState('')
   const handleChangePhone = (event) => {
-    const newValuePhone = event.target.value
-    setPhone(newValuePhone)
+    const value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    if (value.length <= 11) {
+      setPhone(value)
+    }
   }
 
   const [model, setModel] = useState('')
@@ -95,7 +99,7 @@ const ClientFlow = () => {
     checkBoxReview(3)
   }
 
-  const [labelReview, setLabelReview] = useState('')
+  const [labelService, setLabelService] = useState(null)
   const checkBoxReview = (serviceSelected) => {
     let label = ''
     if (serviceSelected == 1) {
@@ -105,9 +109,9 @@ const ClientFlow = () => {
     } else if (serviceSelected == 3) {
       label = 'Polimento'
     } else {
-      label = ''
+      label = null
     }
-    setLabelReview(label)
+    setLabelService(label)
   }
 
   const [selectedDate, setSelectedDate] = useState(null)
@@ -118,7 +122,6 @@ const ClientFlow = () => {
 
     const formattedDate = `${day}/${month}/${year}`
 
-    console.log(formattedDate)
     setSelectedDate(formattedDate)
   }
 
@@ -127,26 +130,43 @@ const ClientFlow = () => {
     setSelectedHour(newHour)
 
   }
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault()
-  //   const data = {
-  //     name: e.target.element.name.value,
-  //   }
-  //   console.log(data)
-  // }
-
+  
   const reviews = [
     { id: 0, text: `${name}`, imgSrc: User },
     { id: 1, text: `${phone}`, imgSrc: Phone },
     { id: 2, text: `${model} - ${plate}`, imgSrc: vehicleFlow.imgSrc },
-    { id: 3, text: `${labelReview}`, imgSrc: Service },
+    { id: 3, text: `${labelService}`, imgSrc: Service },
     { id: 4, text: `${selectedDate} - ${selectedHour}h`, imgSrc: Date},
     { id: 5, text: `${paymentLabel}`, imgSrc: Wallet}
   ]
+
+  const navigate = useNavigate()
+
+  const [formError, setFormError] = useState(null)
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
+    if (!name, !phone, !model, !plate, !labelService, !selectedDate, !selectedHour, !paymentLabel) {
+      setFormError('Preencha todos os campos do formulário')
+      return
+    }
+
+    const { data, error } = await supabase
+      .from('schedule')
+      .insert([{ name, phone, model, plate, labelService, selectedDate, selectedHour, paymentLabel }])
+
+    if (error) {
+      setFormError('Preencha todos os campos do formulário')
+    }
+    if (data) {
+      setFormError(null)
+      navigate('/')
+    }
+  }
   
   return (
-    <form className='h-auto'>
+    <form className='h-auto' onSubmit={handleSubmit}>
     <div className='max-w-[800px] mt-[30px] w-full mx-auto flex flex-col items-center md:mt-[170px]'>
       <h1 className='text-xl md:text-3xl sm:text-2xl px-6'>Bem vindo ao nosso serviço de agendamento!!</h1>
       <div className='w-[80%]'>
@@ -159,7 +179,7 @@ const ClientFlow = () => {
             </label>
             <label className='relative cursor-pointer' >
               <span className='text-2xl text-[#9db8fb] text-opacity-80 top-6 px-1'>Telefone</span>
-              <input type="number" onChange={handleChangePhone} value={phone} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' maxLength={11} />
+            <input type="number" maxLength={11} onChange={handleChangePhone} value={phone} className='h-20 w-full px-4 text-2xl text-gray-700 border-[#9db8fb] border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 transition duration-200' />
             </label>
           </div>
         </div>
@@ -231,9 +251,12 @@ const ClientFlow = () => {
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-1 w-full h-[100px] mb-[25%] mt-[10%]'>
+      <div className='grid grid-cols-1 w-full h-[100px] mb-[25%] mt-[10%] gap-4'>
         <div className='text-center'>
-        <button type='submit' className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-[80%] h-[70px]'>Agendar</button>
+          <p className='font-bold text-lg text-red-600'>{formError}</p>
+        </div>
+        <div className='text-center'>
+        <button type='submit' onClick={handleSubmit} className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-[80%] h-[70px]'>Agendar</button>
         </div>
       </div>
     </div>
