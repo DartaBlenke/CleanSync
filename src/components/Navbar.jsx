@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Menu, X, Car } from 'lucide-react'
 import { useState } from 'react'
+import React from 'react'
 
 const Navbar = () => {
   const [click, setClick] = useState(false)

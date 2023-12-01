@@ -1,6 +1,6 @@
+import 'react-date-picker/dist/DatePicker.css'
 import React from 'react'
 import { useState } from 'react'
-import 'react-date-picker/dist/DatePicker.css'
 import 'react-calendar/dist/Calendar.css'
 import DatePicker from 'react-date-picker'
 import '../styles/disableStyles.css'
