@@ -1,4 +1,3 @@
-
 export default {
   testEnvironment: 'jest-environment-jsdom',
   roots: ['<rootDir>/src'],
@@ -7,4 +6,9 @@ export default {
   transform: {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/*.test.js',
+    '/__tests__/'
+  ],
 };
