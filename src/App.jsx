@@ -4,7 +4,8 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import SUV from './assets/img/SUV.svg'
 import Bike from './assets/img/motorbike.svg'
-import Car from './assets/img/car.svg';
+import Car from './assets/img/car.svg'
+import { Analytics } from '@vercel/analytics/react'
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       </div>
       <div>
         <Outlet />
+        <Analytics />
       </div>
     </div>
   )
