@@ -98,7 +98,7 @@ export default function Wash() {
 
   return (
     <div className='mt-[30px] w-full h-auto mx-auto flex flex-col items-center md:mt-[100px]'>
-      <h1 className='text-xl md:text-3xl sm:text-2xl px-6 pb-10'>Visualize os agendamentos !!</h1>
+      <h1 className='text-xl md:text-3xl sm:text-2xl px-6 pb-10'>Tabela de agendamentos !!</h1>
       <h1 className='text-2xl text-red-600'>{fetchError}</h1>
       <Paper sx={{ width: '80%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 4040 }}>

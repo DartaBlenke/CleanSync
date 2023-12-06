@@ -24,7 +24,7 @@ describe('Wash', () => {
         <Wash />
       </Router>
     );
-    expect(screen.getByText('Visualize os agendamentos !!')).toBeInTheDocument();
+    expect(screen.getByText('Tabela de agendamentos !!')).toBeInTheDocument();
   });
 
   test('renders the table', () => {
