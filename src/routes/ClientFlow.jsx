@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Datepicker } from '../components/DatePicker'
 import { HourSelect } from '../components/HourSelect'
@@ -15,6 +15,9 @@ import { ReviewCard } from '../components/ReviewCard'
 import '../styles/disableStyles.css'
 import supabase from '../config/supabase'
 import React from 'react'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const ClientFlow = () => {
@@ -80,52 +83,59 @@ const ClientFlow = () => {
     setPlate(newValuePlate)
   }
 
-  const [checkBoxWash, setCheckBoxWash] = useState(false)
+  const [checkBoxWash, setCheckBoxWash] = useState(false);
+  const [checkBoxWax, setCheckBoxWax] = useState(false);
+  const [checkBoxPolish, setCheckBoxPolish] = useState(false);
+  const [labelService, setLabelService] = useState('');
+
   const handleCheckboxWash = (event) => {
-    const newValue = event.target.checked
-    setCheckBoxWash(newValue)
-    checkBoxReview(1)
-  }
+    const newValue = event.target.checked;
+    setCheckBoxWash(newValue);
+    updateLabel('Lavação', newValue);
+  };
 
-  const [checkBoxWax, setCheckBoxWax] = useState(false)
   const handleCheckboxWax = (event) => {
-    const newValue = event.target.checked
-    setCheckBoxWax(newValue)
-    checkBoxReview(2)
-  }
+    const newValue = event.target.checked;
+    setCheckBoxWax(newValue);
+    updateLabel('Cera', newValue);
+  };
 
-  const [checkBoxPolish, setCheckBoxPolish] = useState(false)
   const handleCheckboxPolish = (event) => {
-    const newValue = event.target.checked
-    setCheckBoxPolish(newValue)
-    checkBoxReview(3)
-  }
+    const newValue = event.target.checked;
+    setCheckBoxPolish(newValue);
+    updateLabel('Polimento', newValue);
+  };
 
-  const [labelService, setLabelService] = useState(null)
-  const checkBoxReview = (serviceSelected) => {
-    let label = ''
-    if (serviceSelected == 1) {
-      label = 'Lavação'
-    } else if (serviceSelected == 2) {
-      label = 'Cera'
-    } else if (serviceSelected == 3) {
-      label = 'Polimento'
+  const updateLabel = (service, checked) => {
+    let updatedLabel = labelService;
+
+    if (checked) {
+      if (labelService === '') {
+        updatedLabel = `${service}`;
+      } else {
+        updatedLabel = `${labelService} - ${service}`;
+      }
     } else {
-      label = null
+      updatedLabel = labelService.replace(` - ${service}`, '').replace(`${service} - `, '').replace(` ${service}`, '');
     }
-    setLabelService(label)
-  }
 
-  const [selectedDate, setSelectedDate] = useState(null)
+    setLabelService(updatedLabel);
+  };
+
+  const [formattedDate, setFormattedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const selectNewDate = (newDate) => {
-    const day = newDate.getDate().toString().padStart(2, '0')
-    const month = (newDate.getMonth() + 1).toString().padStart(2, '0')
-    const year = newDate.getFullYear()
+    const year = newDate.getFullYear();
+    const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = newDate.getDate().toString().padStart(2, '0');
 
-    const formattedDate = `${day}/${month}/${year}`
+    const formatted = `${day}/${month}/${year}`;
+    setFormattedDate(formatted);
 
-    setSelectedDate(formattedDate)
-  }
+    const formattedISO = `${year}-${month}-${day}`;
+    setSelectedDate(formattedISO);
+  };
+
 
   const [selectedHour, setSelectedHour] = useState(8)
   const getSelectedHour = (newHour) => {
@@ -137,39 +147,117 @@ const ClientFlow = () => {
     { id: 0, text: `${name}`, imgSrc: User },
     { id: 1, text: `${phone}`, imgSrc: Phone },
     { id: 2, text: `${model} - ${plate}`, imgSrc: vehicleFlow.imgSrc },
-    { id: 3, text: `${labelService}`, imgSrc: Service },
-    { id: 4, text: `${selectedDate} - ${selectedHour}h`, imgSrc: Date},
+    { id: 3, text: `${labelService} `, imgSrc: Service },
+    { id: 4, text: `${formattedDate} - ${selectedHour}h`, imgSrc: Date},
     { id: 5, text: `${paymentLabel}`, imgSrc: Wallet}
   ]
 
-  const [formError, setFormError] = useState(null)
-  const [agendamentoConfirmado, setAgendamentoConfirmado] = useState(false)
+  async function validDateTime(selectedDate, selectedHour) {
+    try {
+      const { data: records, error } = await supabase
+        .from('schedule')
+        .select('*')
+        .eq('selectedDate', selectedDate)
+        .eq('selectedHour', selectedHour);
   
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    
-    if (!name, !phone, !model, !plate, !labelService, !selectedDate, !selectedHour, !paymentLabel) {
-      setFormError('Preencha todos os campos do formulário')
-      return
-    }
-
-    const { data, error } = await supabase
-      .from('schedule')
-      .insert([{ name, phone, model, plate, labelService, selectedDate, selectedHour, paymentLabel }])
-
-    if (error) {
-      setFormError('Preencha todos os campos do formulário')
-    }
-    if (data) {
-      setFormError(null)
-    }
-    if (!formError) {
-      setAgendamentoConfirmado(true)
+      if (error) {
+        throw error;
+      }
+  
+      if (records && records.length > 0) {
+        return false; 
+      }
+  
+      return true; 
+    } catch (error) {
+      throw new Error(`Erro ao validar a data e hora: ${error.message}`);
     }
   }
   
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!name || !phone || !model || !plate || !labelService || !selectedDate || !selectedHour || !paymentLabel) {
+      toastWarning()
+      return;
+    }
+  
+    try {
+      const validated = await validDateTime(selectedDate, selectedHour);
+  
+      if (!validated) {
+        toastTimeError()
+        return;
+      }
+  
+      const { error } = await supabase
+        .from('schedule')
+        .insert([{ name, phone, model, plate, labelService, selectedDate, selectedHour, paymentLabel }]);
+  
+      if (error) {
+        toastError()
+      } else {
+        setTimeout(() => {
+          return navigate('/');
+        }, 4000);
+        return notify();
+      }
+    } catch (error) {
+      console.error(error.message);
+      toastError()
+    }
+  };
+  
+  const notify = () => toast.success('Agendamento Confirmado!', {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
+  const toastTimeError = () => toast.error('Esse Horário já esta ocupado!', {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+
+    const toastError = () => toast.error('Erro ao realizar o agendamento!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+
+    const toastWarning = () => toast.warning('Preencha todos os campos do formulário!', {
+      position: "top-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+  
+  const navigate = useNavigate()
+  
   return (
     <form className='h-auto' onSubmit={handleSubmit}>
+      <ToastContainer/>
     <div className='max-w-[800px] mt-[30px] w-full mx-auto flex flex-col items-center md:mt-[170px]'>
       <h1 className='text-xl md:text-3xl sm:text-2xl px-6'>Bem vindo ao nosso serviço de agendamento!!</h1>
       <div className='w-[80%]'>
@@ -203,19 +291,19 @@ const ClientFlow = () => {
           <p className='sm:text-3xl text-2xl md:text-4xl mt-10 font-bold text-blue-900 text-center px-10'>Selecione os serviços desejados.</p>
           <div className='flex flex-col gap-10 py-[15%]'>
             <label className="text-2xl text-[#9db8fb] w-full cursor-pointer">
-              <div className="flex items-center border border-[#9db8fb] rounded h-20 ">
+              <div className="flex items-center border-2 border-[#9db8fb] border-opacity-50 rounded-lg h-20 ">
                 <input type="checkbox" checked={checkBoxWash} onChange={handleCheckboxWash} className="w-5 h-5 mx-6 accent-green-600 border-green-600 rounded cursor-pointer" />
                 Lavação - R${washPrice}
               </div>
             </label>
             <label className="text-2xl text-[#9db8fb] w-full cursor-pointer">
-              <div className="flex items-center border border-[#9db8fb] rounded h-20 ">
+              <div className="flex items-center border-2 border-[#9db8fb] border-opacity-50 rounded-lg h-20 ">
                 <input type="checkbox" checked={checkBoxWax} onChange={handleCheckboxWax} className="w-5 h-5 mx-6 accent-green-600 border-green-600 rounded cursor-pointer" />
                 Cera - R${waxPrice}
               </div>
             </label>
             <label className="text-2xl text-[#9db8fb] w-full cursor-pointer">
-              <div className="flex items-center border border-[#9db8fb] rounded h-20 ">
+              <div className="flex items-center border-2 border-[#9db8fb] border-opacity-50 rounded-lg h-20 ">
                 <input type="checkbox" checked={checkBoxPolish} onChange={handleCheckboxPolish} className="w-5 h-5 mx-6 accent-green-600 border-green-600 rounded cursor-pointer" />
                 Polimento - R${polishPrice}
               </div>
@@ -255,12 +343,6 @@ const ClientFlow = () => {
         </div>
       </div>
       <div className='grid grid-cols-1 w-full h-[100px] mb-[25%] mt-[10%] gap-4'>
-        <div className='text-center'>
-          <p className='font-bold text-lg text-red-600'>{formError}</p>
-          {agendamentoConfirmado && (
-            <p className='font-bold text-green-600 text-lg mb-4'>Agendamento Confirmado</p>
-          )}
-        </div>
         <div className='text-center'>
         <button type='submit' onClick={handleSubmit} className='bg-green-500/80 text-black py-2 px-6 rounded hover:bg-green-900 hover:text-white duration-300 w-[80%] h-[70px]'>Agendar</button>
         </div>

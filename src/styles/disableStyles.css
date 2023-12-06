@@ -5,3 +5,12 @@
 .react-tel-input, .css-1o2zwnw  {
   font-family: 'Nunito', sans-serif !important;
 }
+
+
+@media screen and (max-width: 600px) {
+  .Toastify__toast-container {
+    margin-left: 10% !important;
+    margin-top: 5% !important;
+    width: 80% !important;
+  }
+}
