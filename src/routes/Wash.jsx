@@ -11,7 +11,7 @@ import supabase from '../config/supabase'
 import { useEffect, useState } from 'react'
 
 export const columns = [
-  { id: 'selectedDate', label: 'Data - mês/dia/ano', minWidth: 40 },
+  { id: 'selectedDate', label: 'Data', minWidth: 40 },
   { id: 'selectedHour', label: 'Horário', minWidth: 40 },
   { id: 'model', label: 'Modelo', minWidth: 40 },
   { id: 'plate', label: 'Placa', minWidth: 40 },
