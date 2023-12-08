@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ['next/navigation.js'],
+      external: ['navigation.js'],
     },
   },
 })
