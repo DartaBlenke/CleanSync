@@ -16,8 +16,8 @@ import '../styles/disableStyles.css'
 import supabase from '../config/supabase'
 import React from 'react'
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const ClientFlow = () => {
@@ -27,9 +27,9 @@ const ClientFlow = () => {
 
   const { item } = useParams()
 
-  let vehicleFlow = null;
+  let vehicleFlow = null
   if (vehicles && vehicles[item]) {
-    vehicleFlow = vehicles[item];
+    vehicleFlow = vehicles[item]
   }
 
   const washPrice = vehicleFlow.prices[0]
@@ -83,58 +83,58 @@ const ClientFlow = () => {
     setPlate(newValuePlate)
   }
 
-  const [checkBoxWash, setCheckBoxWash] = useState(false);
-  const [checkBoxWax, setCheckBoxWax] = useState(false);
-  const [checkBoxPolish, setCheckBoxPolish] = useState(false);
-  const [labelService, setLabelService] = useState('');
+  const [checkBoxWash, setCheckBoxWash] = useState(false)
+  const [checkBoxWax, setCheckBoxWax] = useState(false)
+  const [checkBoxPolish, setCheckBoxPolish] = useState(false)
+  const [labelService, setLabelService] = useState('')
 
   const handleCheckboxWash = (event) => {
-    const newValue = event.target.checked;
-    setCheckBoxWash(newValue);
-    updateLabel('Lavação', newValue);
-  };
+    const newValue = event.target.checked
+    setCheckBoxWash(newValue)
+    updateLabel('Lavação', newValue)
+  }
 
   const handleCheckboxWax = (event) => {
-    const newValue = event.target.checked;
-    setCheckBoxWax(newValue);
-    updateLabel('Cera', newValue);
-  };
+    const newValue = event.target.checked
+    setCheckBoxWax(newValue)
+    updateLabel('Cera', newValue)
+  }
 
   const handleCheckboxPolish = (event) => {
-    const newValue = event.target.checked;
-    setCheckBoxPolish(newValue);
-    updateLabel('Polimento', newValue);
-  };
+    const newValue = event.target.checked
+    setCheckBoxPolish(newValue)
+    updateLabel('Polimento', newValue)
+  }
 
   const updateLabel = (service, checked) => {
-    let updatedLabel = labelService;
+    let updatedLabel = labelService
 
     if (checked) {
       if (labelService === '') {
-        updatedLabel = `${service}`;
+        updatedLabel = `${service}`
       } else {
-        updatedLabel = `${labelService} - ${service}`;
+        updatedLabel = `${labelService} - ${service}`
       }
     } else {
-      updatedLabel = labelService.replace(` - ${service}`, '').replace(`${service} - `, '').replace(` ${service}`, '');
+      updatedLabel = labelService.replace(` - ${service}`, '').replace(`${service} - `, '').replace(` ${service}`, '')
     }
 
-    setLabelService(updatedLabel);
-  };
+    setLabelService(updatedLabel)
+  }
 
-  const [formattedDate, setFormattedDate] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [formattedDate, setFormattedDate] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
   const selectNewDate = (newDate) => {
-    const year = newDate.getFullYear();
-    const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
-    const day = newDate.getDate().toString().padStart(2, '0');
+    const year = newDate.getFullYear()
+    const month = (newDate.getMonth() + 1).toString().padStart(2, '0')
+    const day = newDate.getDate().toString().padStart(2, '0')
 
-    const formatted = `${day}/${month}/${year}`;
-    setFormattedDate(formatted);
+    const formatted = `${day}/${month}/${year}`
+    setFormattedDate(formatted)
 
-    const formattedISO = `${year}-${month}-${day}`;
-    setSelectedDate(formattedISO);
-  };
+    const formattedISO = `${year}-${month}-${day}`
+    setSelectedDate(formattedISO)
+  }
 
 
   const [selectedHour, setSelectedHour] = useState(8)
@@ -158,56 +158,56 @@ const ClientFlow = () => {
         .from('schedule')
         .select('*')
         .eq('selectedDate', selectedDate)
-        .eq('selectedHour', selectedHour);
+        .eq('selectedHour', selectedHour)
   
       if (error) {
-        throw error;
+        throw error
       }
   
       if (records && records.length > 0) {
-        return false; 
+        return false 
       }
   
-      return true; 
+      return true 
     } catch (error) {
-      throw new Error(`Erro ao validar a data e hora: ${error.message}`);
+      throw new Error(`Erro ao validar a data e hora: ${error.message}`)
     }
   }
   
   
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
   
     if (!name || !phone || !model || !plate || !labelService || !selectedDate || !selectedHour || !paymentLabel) {
       toastWarning()
-      return;
+      return
     }
   
     try {
-      const validated = await validDateTime(selectedDate, selectedHour);
+      const validated = await validDateTime(selectedDate, selectedHour)
   
       if (!validated) {
         toastTimeError()
-        return;
+        return
       }
   
       const { error } = await supabase
         .from('schedule')
-        .insert([{ name, phone, model, plate, labelService, selectedDate, selectedHour, paymentLabel }]);
+        .insert([{ name, phone, model, plate, labelService, selectedDate, selectedHour, paymentLabel }])
   
       if (error) {
         toastError()
       } else {
         setTimeout(() => {
-          return navigate('/');
-        }, 4000);
-        return notify();
+          return navigate('/')
+        }, 4000)
+        return notify()
       }
     } catch (error) {
-      console.error(error.message);
+      console.error(error.message)
       toastError()
     }
-  };
+  }
   
   const notify = () => toast.success('Agendamento Confirmado!', {
     position: "top-center",
@@ -218,7 +218,7 @@ const ClientFlow = () => {
     draggable: true,
     progress: undefined,
     theme: "colored",
-    });
+    })
 
   const toastTimeError = () => toast.error('Esse Horário já esta ocupado!', {
     position: "top-center",
@@ -229,7 +229,7 @@ const ClientFlow = () => {
     draggable: true,
     progress: undefined,
     theme: "colored",
-    });
+    })
 
     const toastError = () => toast.error('Erro ao realizar o agendamento!', {
       position: "top-center",
@@ -240,7 +240,7 @@ const ClientFlow = () => {
       draggable: true,
       progress: undefined,
       theme: "colored",
-      });
+      })
 
     const toastWarning = () => toast.warning('Preencha todos os campos do formulário!', {
       position: "top-center",
@@ -251,7 +251,7 @@ const ClientFlow = () => {
       draggable: true,
       progress: undefined,
       theme: "colored",
-      });
+      })
   
   const navigate = useNavigate()
   

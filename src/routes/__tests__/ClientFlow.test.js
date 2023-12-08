@@ -20,26 +20,28 @@ jest.mock('../../config/supabase', () => ({
   from: () => ({
     insert: async () => ({ data: {}, error: null }) 
   })
-}));
+}))
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: () => ({ item: 'seu_item_de_teste_aqui' }),
-}));
+}))
+
+jest.mock('react-toastify/dist/ReactToastify.css', () => ({}))
 
 describe('ClientFlow', () => {
   const mockVehicles = {
     seu_item_de_teste_aqui: {
       prices: [10, 20, 30], 
     },
-  };
+  }
 
   const localStorageMock = {
     getItem: jest.fn().mockReturnValue(JSON.stringify(mockVehicles)),
-  };
+  }
   Object.defineProperty(window, 'localStorage', {
     value: localStorageMock,
-  });
+  })
 
   test('renders the main title', () => {
     act(() => {
@@ -47,10 +49,10 @@ describe('ClientFlow', () => {
         <Router>
           <ClientFlow />
         </Router>
-      );
-    });
-    expect(screen.getByText('Bem vindo ao nosso serviço de agendamento!!')).toBeInTheDocument();
-  });
+      )
+    })
+    expect(screen.getByText('Bem vindo ao nosso serviço de agendamento!!')).toBeInTheDocument()
+  })
 
   test('renders the subtitle - pessoa', () => {
     act(() => {
@@ -58,10 +60,10 @@ describe('ClientFlow', () => {
         <Router>
           <ClientFlow />
         </Router>
-      );
-    });
-    expect(screen.getByText('Informe seus dados pessoais.')).toBeInTheDocument();
-  });
+      )
+    })
+    expect(screen.getByText('Informe seus dados pessoais.')).toBeInTheDocument()
+  })
 
   test('renders the subtitle - veiculo', () => {
     act(() => {
@@ -69,10 +71,10 @@ describe('ClientFlow', () => {
         <Router>
           <ClientFlow />
         </Router>
-      );
-    });
-    expect(screen.getByText('Informe os dados do veículo.')).toBeInTheDocument();
-  });
+      )
+    })
+    expect(screen.getByText('Informe os dados do veículo.')).toBeInTheDocument()
+  })
 
   test('renders the subtitle - servico', () => {
     act(() => {
@@ -80,10 +82,10 @@ describe('ClientFlow', () => {
         <Router>
           <ClientFlow />
         </Router>
-      );
-    });
-    expect(screen.getByText('Selecione os serviços desejados.')).toBeInTheDocument();
-  });
+      )
+    })
+    expect(screen.getByText('Selecione os serviços desejados.')).toBeInTheDocument()
+  })
 
   test('renders the subtitle - data', () => {
     act(() => {
@@ -91,10 +93,10 @@ describe('ClientFlow', () => {
         <Router>
           <ClientFlow />
         </Router>
-      );
-    });
-    expect(screen.getByText('Selecione a data e hora do serviço.')).toBeInTheDocument();
-  });
+      )
+    })
+    expect(screen.getByText('Selecione a data e hora do serviço.')).toBeInTheDocument()
+  })
 
   test('renders the subtitle - pagamento', () => {
     act(() => {
@@ -102,10 +104,10 @@ describe('ClientFlow', () => {
         <Router>
           <ClientFlow />
         </Router>
-      );
-    });
-    expect(screen.getByText('Selecione a forma de pagamento.')).toBeInTheDocument();
-  });
+      )
+    })
+    expect(screen.getByText('Selecione a forma de pagamento.')).toBeInTheDocument()
+  })
 
   test('renders the subtitle - finais', () => {
     act(() => {
@@ -113,10 +115,10 @@ describe('ClientFlow', () => {
         <Router>
           <ClientFlow />
         </Router>
-      );
-    });
-    expect(screen.getByText('Informações finais.')).toBeInTheDocument();
-  });
+      )
+    })
+    expect(screen.getByText('Informações finais.')).toBeInTheDocument()
+  })
 
   test('renders the Agendar button', () => {
     act(() => {
@@ -124,11 +126,12 @@ describe('ClientFlow', () => {
         <Router>
           <ClientFlow />
         </Router>
-      );
-    });
+      )
+    })
 
-    const agendarButton = screen.getByRole('button', { name: 'Agendar' });
-    expect(agendarButton).toBeInTheDocument();
-  });
+    const agendarButton = screen.getByRole('button', { name: 'Agendar' })
+    expect(agendarButton).toBeInTheDocument()
+  })
 
-});
+
+})

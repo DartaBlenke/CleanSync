@@ -96,6 +96,10 @@ export default function Wash() {
         })
     : []
 
+    function teste(teste){
+      console.log(teste)
+    }
+
   return (
     <div className='mt-[30px] w-full h-auto mx-auto flex flex-col items-center md:mt-[100px]'>
       <h1 className='text-xl md:text-3xl sm:text-2xl px-6 pb-10'>Tabela de agendamentos !!</h1>
@@ -126,6 +130,9 @@ export default function Wash() {
                           </TableCell>
                         )
                       })}
+                      <TableCell align="center">
+                        <button className='w-20 h-10 bg-red-600' onClick={teste(row)}>Teste</button>
+                      </TableCell>
                     </TableRow>
                   )
                 })}
