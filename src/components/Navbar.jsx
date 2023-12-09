@@ -21,12 +21,14 @@ const Navbar = () => {
   </>
   return (
     <nav>
-      <div className='flex px-10 md:px-20 py-[13%] lg:py-8 md:py-8'>
-        <div className='flex items-center flex-1'>
-          <Car color='#0c126f'/>
-          <span className='text-3x1 text-blue-950 font-bold px-4'>CleanSync</span>
-        </div>
-        <div className='hidden md:flex lg: flex-1 items center justify-center font-normal'>
+      <div className='flex px-10 md:px-20 py-[13%] lg:py-8 md:py-8 justify-between'>
+        <Link to="/" >
+          <div className='flex items-center flex-1'>
+            <Car color='#0c126f'/>
+            <span className='text-3x1 text-blue-950 font-bold px-4'>CleanSync</span>
+          </div>
+        </Link>
+        <div className='hidden md:flex lg: flex-1 justify-end font-normal'>
           <div className='flex-10'>
             <ul className='flex gap-8 mr-16 text-[18px]'>
               <Link to="Wash">
@@ -38,7 +40,7 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
-        <div>
+        <div >
           {click && content}
         </div>
         <button className='block md:hidden transition' onClick={handleClick} >
