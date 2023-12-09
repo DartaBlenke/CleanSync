@@ -6,7 +6,6 @@ import SUV from './assets/img/SUV.svg'
 import Bike from './assets/img/motorbike.svg'
 import Car from './assets/img/car.svg'
 import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/react'
 
 
 function App() {
@@ -40,7 +39,6 @@ function App() {
       <div>
         <Outlet />
         <Analytics />
-        <SpeedInsights />
       </div>
     </div>
   )
