@@ -231,27 +231,27 @@ const ClientFlow = () => {
     theme: "colored",
     })
 
-    const toastError = () => toast.error('Erro ao realizar o agendamento!', {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      })
+  const toastError = () => toast.error('Erro ao realizar o agendamento!', {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    })
 
-    const toastWarning = () => toast.warning('Preencha todos os campos do formulário!', {
-      position: "top-center",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      })
+  const toastWarning = () => toast.warning('Preencha todos os campos do formulário!', {
+    position: "top-center",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    })
   
   const navigate = useNavigate()
   

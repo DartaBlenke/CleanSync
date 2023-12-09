@@ -9,6 +9,8 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import supabase from '../config/supabase'
 import { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const columns = [
   { id: 'selectedDate', label: 'Data', minWidth: 40 },
@@ -105,6 +107,7 @@ export default function Wash() {
           if (data) {
             setSchedule(data)
             setFetchError(null)
+            notify()
           }
         }
       } catch (error) {
@@ -132,8 +135,20 @@ export default function Wash() {
       )
     : []
 
+    const notify = () => toast.success('Agendamento excluído com sucesso!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      })
+
   return (
     <div className='mt-[30px] w-full h-auto mx-auto flex flex-col items-center md:mt-[100px]'>
+      <ToastContainer/>
       <h1 className='text-xl md:text-3xl sm:text-2xl px-6 pb-10'>Tabela de agendamentos !!</h1>
       <h1 className='text-2xl text-red-600'>{fetchError}</h1>
       {confirmDelete && (

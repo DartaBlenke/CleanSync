@@ -20,8 +20,8 @@ function App() {
   async function fetchData() {
     let { data: service } = await supabase.from('service').select('*')
     service.forEach((vehicle) => {
-      var teste = vehicles[vehicle.type]
-      teste.prices.push(vehicle.price)
+      var getPrices = vehicles[vehicle.type]
+      getPrices.prices.push(vehicle.price)
     })
     localStorage.setItem('vehicles', JSON.stringify(vehicles))
   }
