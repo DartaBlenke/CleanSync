@@ -7,8 +7,11 @@ export default {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
   coveragePathIgnorePatterns: [
-    '/node_modules/',
+    '<rootDir>/node_modules/',
     '/*.test.js',
     '/__tests__/'
   ],
+  moduleNameMapper: {
+    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+  },
 };
