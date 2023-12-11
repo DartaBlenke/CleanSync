@@ -11,6 +11,7 @@ import supabase from '../config/supabase'
 import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { format, parse } from 'date-fns'
 
 export const columns = [
   { id: 'selectedDate', label: 'Data', minWidth: 40 },
@@ -25,9 +26,11 @@ export const columns = [
 ]
 
 function createData(selectedDate, selectedHour, model, plate, labelService, name, phone, paymentLabel, id) {
+  const formattedDate = format(parse(selectedDate, 'yyyy-MM-dd', new Date()), 'dd/MM/yyyy')
+
   return {
     id,
-    selectedDate,
+    selectedDate: formattedDate,
     selectedHour,
     model,
     plate: plate.toUpperCase(),
@@ -55,7 +58,13 @@ export default function Wash() {
         setSchedule(null)
       }
       if (data) {
-        setSchedule(data)
+        const sortedData = data.sort((a, b) => {
+          const dateA = parse(`${a.selectedDate} ${a.selectedHour}`, 'yyyy-MM-dd HH:mm', new Date())
+          const dateB = parse(`${b.selectedDate} ${b.selectedHour}`, 'yyyy-MM-dd HH:mm', new Date())
+          return dateA - dateB
+        })
+
+        setSchedule(sortedData)
         setFetchError(null)
       }
     }
@@ -105,7 +114,13 @@ export default function Wash() {
             setSchedule(null)
           }
           if (data) {
-            setSchedule(data)
+            const sortedData = data.sort((a, b) => {
+              const dateA = parse(`${a.selectedDate} ${a.selectedHour}`, 'yyyy-MM-dd HH:mm', new Date())
+              const dateB = parse(`${b.selectedDate} ${b.selectedHour}`, 'yyyy-MM-dd HH:mm', new Date())
+              return dateA - dateB
+            })
+
+            setSchedule(sortedData)
             setFetchError(null)
             notify()
           }
@@ -135,16 +150,16 @@ export default function Wash() {
       )
     : []
 
-    const notify = () => toast.success('Agendamento excluído com sucesso!', {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      })
+  const notify = () => toast.success('Agendamento excluído com sucesso!', {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  })
 
   return (
     <div className='mt-[30px] w-full h-auto mx-auto flex flex-col items-center md:mt-[100px]'>
