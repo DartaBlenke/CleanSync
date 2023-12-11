@@ -51,23 +51,34 @@ export default function Wash() {
 
   useEffect(() => {
     const fetchSchedule = async () => {
-      const { data, error } = await supabase.from('schedule').select()
-
-      if (error) {
-        setFetchError('Agendamentos não encontrados')
-        setSchedule(null)
-      }
-      if (data) {
-        const sortedData = data.sort((a, b) => {
-          const dateA = parse(`${a.selectedDate} ${a.selectedHour}`, 'yyyy-MM-dd HH:mm', new Date())
-          const dateB = parse(`${b.selectedDate} ${b.selectedHour}`, 'yyyy-MM-dd HH:mm', new Date())
-          return dateA - dateB
-        })
-
-        setSchedule(sortedData)
-        setFetchError(null)
+      try {
+        const { data, error } = await supabase.from('schedule').select()
+    
+        if (error) {
+          setFetchError('Agendamentos não encontrados')
+          setSchedule(null)
+        }
+    
+        if (data) {
+          const sortedData = data.sort((a, b) => {
+            const dateA = new Date(`${a.selectedDate}T${String(a.selectedHour).padStart(2, '0')}:00:00`)
+            const dateB = new Date(`${b.selectedDate}T${String(b.selectedHour).padStart(2, '0')}:00:00`)
+            
+            if (dateA.getTime() === dateB.getTime()) {
+              return parseInt(a.selectedHour) - parseInt(b.selectedHour)
+            }
+    
+            return dateA - dateB
+          })
+    
+          setSchedule(sortedData)
+          setFetchError(null)
+        }
+      } catch (error) {
+        console.error('Erro ao buscar agendamentos:', error.message)
       }
     }
+    
     fetchSchedule()
   }, [])
 
