@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Menu, X, Car } from 'lucide-react'
 import { useState } from 'react'
+import Cleansync from '../assets/img/cleansync.svg'
 import React from 'react'
 
 const Navbar = () => {
@@ -24,8 +25,7 @@ const Navbar = () => {
       <div className='flex px-10 md:px-20 py-[13%] lg:py-8 md:py-8 justify-between'>
         <Link to="/" >
           <div className='flex items-center flex-1'>
-            <Car color='#0c126f'/>
-            <span className='text-3x1 text-blue-950 font-bold px-4'>CleanSync</span>
+            <img src={Cleansync} alt="logo" className='scale-[100%]'/>
           </div>
         </Link>
         <div className='hidden md:flex lg: flex-1 justify-end font-normal'>
